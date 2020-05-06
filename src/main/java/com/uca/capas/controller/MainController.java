@@ -1,6 +1,7 @@
 package com.uca.capas.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.http.MediaType;
@@ -16,6 +17,10 @@ import com.uca.capas.domain.Student;
 
 @Controller
 public class MainController {
+	
+	private List<Student> students = new ArrayList<Student>();
+	
+	
 	@RequestMapping(method=RequestMethod.GET)
 	
 	
@@ -41,14 +46,23 @@ public class MainController {
 	
 	@PostMapping("/formData")
 	public ModelAndView procesar(Student student) {
-				
+		students.add(student);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("prueba");
-		mav.addObject("estado", student.delegateEstado());
-		mav.addObject("student", student);
+		mav.setViewName("index");
+		mav.addObject("student", new Student());
 		
 		return mav; 
 	}
 	
+	@GetMapping("/listado")
+	public ModelAndView listado() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("listado");
+		mav.addObject("studentList", this.students);
+		
+		return mav; 
+		
+	}
 	
 }

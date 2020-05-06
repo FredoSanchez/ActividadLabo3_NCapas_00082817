@@ -8,6 +8,10 @@ public class Student {
 	private String carrera;
 	private Boolean estado;
 	
+	public Student() {
+		super();
+	}
+
 	public Student(String nombre, String apellido, String fEntrada, String carrera, Boolean estado) {
 		super();
 		this.nombre = nombre;
